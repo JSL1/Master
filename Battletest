@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Basic RPG battle system onest</title>
+	<link type="text/css" rel="stylesheet" href="style.css" />
+<script type="text/javascript">
+//declare stuff
+var playerHealth = 100;
+var enemyHealth = 100;
+var potions = 2;
+var grenades = 2;
+
+//update enemy health
+function updateEH()
+{
+var ehtxt = document.getElementById("EH");
+ehtxt.innerHTML = ("Enemy health: <progress value='" + enemyHealth + "' max='100'></progress> " + enemyHealth + "HP");
+if (enemyHealth < 1)
+	{
+	var killmenu = document.getElementById("menu");
+	var ded = document.getElementById("enemyimage");
+	var msg = document.getElementById("enemytext");
+	killmenu.innerHTML = "";
+	ded.innerHTML = "<img src='deadpizzaguy.jpg' />";
+	msg.innerHTML = "I'm dead.";
+	showresults();
+	}else {
+	}
+}
+
+//update player health
+function updatePH()
+{
+var phtxt = document.getElementById("PH");
+phtxt.innerHTML = ("Health: <progress value='" + playerHealth + "' max='100'></progress> " + playerHealth + "HP");
+if (playerHealth < 1)
+	{
+	document.write("<center><div id='gameover'><img src='niggauded.jpg' /><br /><h2>Wipe yourself off man, you dead.</h2></center>");
+	} else {
+	}
+}
+
+//attack
+function attack()
+{
+alert("You attack! 10 damage!");
+enemyHealth = (enemyHealth - 10);
+updateEH();
+enemyTurn();
+}
+
+//defend
+function defend()
+{
+alert("You curled up into a ball and pretended to be dead.");
+alert("The enemy attack! 5 damage!");
+playerHealth = (playerHealth - 5);
+updatePH();
+}
+
+//enemy's turn
+function enemyTurn()
+{
+alert("enemy attacks! 10 damage!");
+playerHealth = (playerHealth - 10);
+updatePH();
+}
+
+//enemy's turn when he's mad
+function enemyTurnPissed()
+{
+alert("enemy attacks! 30 damage!");
+playerHealth = (playerHealth - 30);
+updatePH();
+}
+
+//tipping
+function tipPizzaGuy() 
+{
+	var tip = (prompt("enter tip amount: $"));
+	alert("$" + tip + " is too low! Now he's really pissed!");
+	enemyTurnPissed();
+}
+
+function usePotion()
+{
+	if (potions > 0)
+	{
+		if (playerHealth > 80)
+		{
+			var healed = (100 - playerHealth);
+			alert ("Used a potion, " + healed + "HP restored!");
+			playerHealth = (playerHealth + healed);
+			potions = (potions - 1);
+			updatePotions();
+			updatePH();
+		} else {
+			alert ("Used a potion, 20 HP restored!");
+			playerHealth = (playerHealth + 20);
+			potions = (potions - 1);
+			updatePotions();
+			updatePH();
+		}
+	}
+	else {
+		alert("nigga you aint got no mo'");
+		}
+	enemyTurn();
+}
+function updatePotions()
+{
+var ptxt = document.getElementById("nopotions");
+ptxt.innerHTML = potions;
+}
+
+function updateGrenades()
+{
+var gtxt = document.getElementById("nogrenades");
+gtxt.innerHTML = grenades;
+}
+
+function throwGrenade()
+{
+	if (grenades > 0)
+	{
+	alert("You threw a grenade at the pizza man, don't you think that's a little extreme?")
+	alert("30 damage!")
+	enemyHealth = (enemyHealth - 30);
+	grenades = (grenades - 1);
+	updateGrenades();
+	updateEH();
+	}
+	else {
+	alert("none left'");
+	}
+	enemyTurn();
+}	
+</script>
+</head> 
+<div id="PH">
+Health: <progress value="100" max="100"></progress>100HP
+</div>
+<div id="menu">
+	<ul>
+		<li><button class="command" onclick="attack()">Attack</button><br /></li>
+		
+		<li><button class="command" onclick="defend()">Defend</button><br/></li>
+		
+		<li><button class="command" onclick="tipPizzaGuy()">Tip</button><br /></li>
+		
+		<li>
+		<button class="command">Item</button><br />
+			<ul>
+				<li><button class="command" onclick="usePotion()">Potion - <a id="nopotions">2</a></button></li>
+				<li><button class="command" onclick="throwGrenade()">Grenade - <a id="nogrenades">2</a></button></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<div id="enemy">
+	<div id="EH">
+	Enemy Health: <progress value="<script type='text/javascript'>document.write(enemyHealth);</script>%" max="100"></progress>100HP<br />
+	</div>
+	<a id="enemyimage"><img src="enemy.jpg" /></a><br />
+	Enemy: <a id="enemytext">"That'll be 23.50 plus tip!"</a>
+</div>
+<div id="results">
+</div>
+</body>
+</html>
