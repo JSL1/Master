@@ -1,0 +1,43 @@
+<!DOCTYPE Html>
+<html>
+<head><title>Randomly Generated Dungeon Map Onest</title>
+<style type="text/css">
+td { height: 8px; width: 8px; border: 1px dotted black;}
+#T1 { position: absolute; top: 2px; }
+#T2 { position: absolute; top: 2px; left: 50px; }
+#T3 { position: absolute; top: 2px; left: 92px; }
+#T4 { position: absolute; top: 2px; left: 134px; }
+#T5 { position: absolute; top: 44px; }
+#T6 { position: absolute; top: 44px; left: 50px; }
+#T7 { position: absolute; top: 44px; left: 92px; }
+#T8 { position: absolute; top: 44px; left: 134px; }
+#T9 { position: absolute; top: 86px; }
+#T10 { position: absolute; top: 86px; left: 50px; }
+#T11 { position: absolute; top: 86px; left: 92px; }
+#T12 { position: absolute; top: 86px; left: 134px; }
+</style>
+<script type="text/javascript" src="dungeon.js">
+</script>
+<!--
+Garbage:
+<script type="text/javascript">
+	for (var r=0; r < 54; r++) {
+		document.write("<tr id='" + r +"'>");
+			for (var c=1; c < 54; c++) {
+		document.write("<td id='" + c +  "'></td>");
+		}
+		document.write("</tr>");
+	}
+</script>
+-->
+</head>
+<body>
+<script type="text/javascript">
+for (var tables = 1; tables < 13; tables++) {
+	document.write("<table id ='T" + tables + "'><tr><td id='" + tables + "_1'></td><td id='" + tables + "_2'></td><td id='" + tables + "_3'></td></tr><tr><td id='" + tables + "_4'></td><td id='" + tables + "_5'></td><td id='" + tables + "_6'></td></tr><td id='" + tables + "_7'></td><td id='" + tables + "_8'></td><td id='" + tables + "_9'></td></tr></table>");
+	choosePiece(tables);
+}
+</script>
+<script>placeExit();</script>
+</body>
+</html>
